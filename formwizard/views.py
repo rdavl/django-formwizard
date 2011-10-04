@@ -163,7 +163,8 @@ class WizardView(TemplateView):
             for field in form.base_fields.itervalues():
                 if (isinstance(field, forms.FileField) and
                         not hasattr(cls, 'file_storage')):
-                    raise NoFileStorageConfigured
+                    raise NoFileStorageConfigured((u"'%s' must define 'file_storage' "
+                        u"in order to use forms containing FileField.") % (cls.__name__))
 
         # build the kwargs for the formwizard instances
         kwargs['form_list'] = init_form_list
